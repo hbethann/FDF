@@ -6,7 +6,7 @@
 /*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:30:47 by hbethann          #+#    #+#             */
-/*   Updated: 2022/06/12 18:44:18 by hbethann         ###   ########.fr       */
+/*   Updated: 2022/06/21 17:28:55 by hbethann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include "minilibx_macos/mlx.h"
+# include <stdio.h>
 
 typedef struct fdf
 {
@@ -26,4 +27,5 @@ typedef struct fdf
 	void	*win_ptr;	
 }				t_fdf;
 
+void	read_file(char *file_name, t_fdf *data);
 #endif

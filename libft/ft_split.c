@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 10:57:28 by einterdi          #+#    #+#             */
-/*   Updated: 2021/10/17 12:05:21 by einterdi         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:26:48 by hbethann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	word_count(char *str, char delim)
+int	word_count(char *str, char delim)
 {
 	int	i;
 	int	count;
@@ -29,7 +29,7 @@ static int	word_count(char *str, char delim)
 	return (count);
 }
 
-static int	word_len(char *word, char delim)
+int	word_len(char *word, char delim)
 {
 	int	count;
 
@@ -41,7 +41,7 @@ static int	word_len(char *word, char delim)
 	return (count);
 }
 
-static void	*free_mem(char **mem)
+void	*free_mem(char **mem)
 {
 	int	i;
 
@@ -55,7 +55,7 @@ static void	*free_mem(char **mem)
 	return (NULL);
 }
 
-static char	**logic(char const *s, char c, char	**mem)
+char	**logic(char const *s, char c, char	**mem)
 {
 	int	i;
 	int	j;

@@ -3,39 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: einterdi <einterdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 22:21:48 by einterdi          #+#    #+#             */
-/*   Updated: 2022/01/20 19:19:50 by einterdi         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:23:33 by hbethann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long long	ft_atoi(const char *str)
+int	ft_atoi(const char *s)
 {
-	int					i;
-	int					flag;
-	unsigned long long	nbr;
+	int	sign;
+	int	res;
+	int	i;
 
+	res = 0;
 	i = 0;
-	nbr = 0;
-	flag = 1;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+	while ((s[i] > 8 && s[i] < 20) || s[i] == ' ')
 		i++;
-	if (str[i] == '-')
-		flag = -1;
-	if (str[i] == '-' || str[i] == '+')
+	if (s[i] == '-')
+		sign = -1;
+	if (s[i] == '+' || s[i] == '-')
 		i++;
-	while (ft_isdigit(str[i]))
-	{
-		nbr = nbr * 10 + str[i] - '0';
-		i++;
-	}
-	if (flag == 1 && nbr >= 9223372036854775807u)
-		return (-1);
-	if (flag == -1 && nbr >= 9223372036854775808u)
-		return (0);
-	return (nbr * flag);
+	while ((s[i] >= '0' && s[i] <= '9') && s[i] != '\0')
+		res = res * 10 + (s[i++] - '0');
+	return (res * sign);
 }

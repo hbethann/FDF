@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: einterdi <einterdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 21:40:21 by einterdi          #+#    #+#             */
-/*   Updated: 2022/01/21 17:29:12 by einterdi         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:23:58 by hbethann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 1
 
 typedef struct s_list
 {
@@ -23,6 +24,10 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int			word_count(char *str, char delim);
+int			word_len(char *word, char delim);
+void		*free_mem(char **mem);
+char		**logic(char const *s, char c, char	**mem);
 int			ft_isalnum(int c);
 int			ft_isalpha(int c);
 int			ft_isascii(int c);
@@ -43,7 +48,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
-long long	ft_atoi(const char *str);
+int			ft_atoi(const char *s);
 void		*ft_calloc(size_t count, size_t size);
 char		*ft_strdup(const char *s1);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
