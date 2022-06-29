@@ -3,30 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egor <egor@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 22:21:48 by einterdi          #+#    #+#             */
-/*   Updated: 2022/06/21 19:23:33 by hbethann         ###   ########.fr       */
+/*   Updated: 2022/06/29 03:18:55 by egor             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *s)
+int	ft_atoi(const char *str)
 {
-	int	sign;
-	int	res;
 	int	i;
+	int	sign;
+	int	rslt;
 
-	res = 0;
+	sign = 1;
+	rslt = 0;
 	i = 0;
-	while ((s[i] > 8 && s[i] < 20) || s[i] == ' ')
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	{
 		i++;
-	if (s[i] == '-')
-		sign = -1;
-	if (s[i] == '+' || s[i] == '-')
+	}
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
 		i++;
-	while ((s[i] >= '0' && s[i] <= '9') && s[i] != '\0')
-		res = res * 10 + (s[i++] - '0');
-	return (res * sign);
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		rslt = (rslt * 10) + (str[i] - 48);
+		i++;
+	}
+	return (rslt * sign);
 }
