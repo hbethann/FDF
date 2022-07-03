@@ -6,7 +6,7 @@
 /*   By: egor <egor@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:45:39 by hbethann          #+#    #+#             */
-/*   Updated: 2022/06/29 03:16:50 by egor             ###   ########.fr       */
+/*   Updated: 2022/07/02 19:38:14 by egor             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_height(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	height = 0;
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -30,17 +30,24 @@ int	get_height(char *file_name)
 	return (height);
 }
 
-int	get_width(char *file_name)
+int	get_width(char *file_name, int check)
 {
-	int	width;
-	int	fd;
+	int		width;
+	int		fd;
+	char	*line;
 
-	fd = open(file_name, O_RDONLY);
-	width = word_count(get_next_line(fd), ' ');
+	if (check == 1)
+	{
+		fd = open(file_name, O_RDONLY);
+		line = get_next_line(fd);
+		width = word_count(line, ' ');
+	}
+	else
+		width = word_count(file_name, ' ');
 	return (width);
 }
 
-void	fill_matrix(int *z_line, char *line)
+void	fill_matrix(int *nums, int *color, char *line)
 {
 	char	**s_line;
 	int		i;
@@ -51,13 +58,35 @@ void	fill_matrix(int *z_line, char *line)
 	s_line = ft_split(line, ' ');
 	while (s_line[i])
 	{
-		z_line[i] = ft_atoi(s_line[i]);
+		nums[i] = ft_atoi(s_line[i]);
+		k = 0;
+		while (s_line[i][k] != ',' && s_line[i][k])
+			k++;
+		if (s_line[i][k++] == ',')
+			color[i] = ato_h(&s_line[i][k]);
+		else
+			color[i] = ft_atoi("0");
 		i++;
 	}
 	j = 0;
 	while (s_line[j])
 		free(s_line[j++]);
 	free(s_line);
+}
+
+int	check_dir(char *filename)
+{
+	int		nb;
+	int		fd;
+	char	*buf;
+
+	fd = open(filename, O_RDONLY);
+	buf = malloc(sizeof(char) * 2);
+	nb = read(fd, buf, 2);
+	if (nb <= 0)
+		return (1);
+	free(buf);
+	return (0);
 }
 
 void	read_file(char *file_name, t_fdf *data)
@@ -67,15 +96,21 @@ void	read_file(char *file_name, t_fdf *data)
 	int		i;
 
 	fd = open(file_name, O_RDONLY);
+	if (fd < 0 || check_dir(file_name))
+		invalid_file();
 	data->height = get_height(file_name);
-	data->width = get_width(file_name);
+	data->width = get_width(file_name, 1);
 	data->z_matrix = (int **)malloc(sizeof(int *) * (data->height + 1));
+	data->color_map = (int **)malloc(sizeof(int *) * (data->height + 1));
 	i = 0;
 	while (i < data->height)
 	{
 		data->z_matrix[i] = (int *)malloc(sizeof(int) * data->width);
+		data->color_map[i] = (int *)malloc(sizeof(int) * data->width);
 		line = get_next_line(fd);
-		fill_matrix(data->z_matrix[i], line);
+		if (data->width != get_width(line, 0))
+			invalid_file();
+		fill_matrix(data->z_matrix[i], data->color_map[i], line);
 		free(line);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: egor <egor@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 12:22:10 by egor              #+#    #+#             */
-/*   Updated: 2022/06/30 13:27:19 by egor             ###   ########.fr       */
+/*   Updated: 2022/07/02 13:30:48 by egor             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	menu(t_fdf *data)
 	int	heigth;
 
 	data->xpm_img = mlx_xpm_file_to_image(data->mlx_ptr,
-			"image/pic.xpm", &wigth, &heigth);
+			"pic.xpm", &wigth, &heigth);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->xpm_img, 0, 0);
 }

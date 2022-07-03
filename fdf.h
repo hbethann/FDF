@@ -6,7 +6,7 @@
 /*   By: egor <egor@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:30:47 by hbethann          #+#    #+#             */
-/*   Updated: 2022/06/30 13:30:41 by egor             ###   ########.fr       */
+/*   Updated: 2022/07/02 19:30:31 by egor             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "minilibx_macos/mlx.h"
 # include <stdio.h>
 # include <math.h>
-# define WIN_WIDTH 2800
-# define WIN_HEIGHT 1800
+# define WIN_WIDTH 2560
+# define WIN_HEIGHT 1600
 
 typedef struct fdf
 {
@@ -44,12 +44,21 @@ typedef struct fdf
 }				t_fdf;
 
 void	read_file(char *file_name, t_fdf *data);
-int		get_width(char *file_name);
-void	fill_matrix(int *z_line, char *line);
+int		get_width(char *file_name, int check);
+void	fill_matrix(int *nums, int *color, char *line);
 int		get_height(char *file_name);
 void	menu(t_fdf *data);
 float	max(float a, float b);
 void	invalid_file(void);
 int		ato_h(char *hex);
+void	draw(t_fdf *data);
+void	set_xy(t_fdf *data, int x, int y, int check);
+void	bresenham(t_fdf *data);
+void	controler(t_fdf *data);
+void	isometric(float *x, float *y, int z, t_fdf	*data);
+int		press(int key, t_fdf *data);
+int		projection(int a);
+void	depth(int key, t_fdf *data);
+int		mouseh(int button, int x, int y, t_fdf *data);
 
 #endif
