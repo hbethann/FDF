@@ -6,7 +6,7 @@
 /*   By: egor <egor@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:48:42 by hbethann          #+#    #+#             */
-/*   Updated: 2022/07/05 18:34:43 by egor             ###   ########.fr       */
+/*   Updated: 2022/07/02 19:53:17 by egor             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ int	main(int argc, char **argv)
 	data.win_ptr = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "fdf");
 	draw(&data);
 	mlx_key_hook(data.win_ptr, press, &data);
+	mlx_mouse_hook(data.win_ptr, mouseh, &data);
 	mlx_loop(data.mlx_ptr);
 }

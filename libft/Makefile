@@ -1,13 +1,15 @@
-NAME=libft.a
+NAME= libft.a
 
-SRCS=*.c  
+SRCS= *.c  
 
-OBJECTS=*.o
+OBJECTS= *.o
+
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
 $(NAME):
-	cc -Wall -Wextra -Werror -c $(SRCS)
+	cc -Wall -Wextra -Werror -c $(SRCS) -I $(HEDER)
 	ar -rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
