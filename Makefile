@@ -1,44 +1,41 @@
 NAME = fdf
+
 CC = cc
-FLAGS = -Wall -Wextra -Werror
-FRAMEWOK = -framework OpenGL -framework AppKit
+
+FLAGS = -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -g
+
 SRCS = main.c	draw.c	key.c	menu.c	read_file.c\
+										libft/libft.a\
 
 BONUS_SRCS = main_bonus.c	draw.c	key_bonus.c	 menu.c	read_file.c\
+														libft/libft.a\
 
-INCL = fdf.h 
-
-LIBFT_DIR = libft
-
-LIBFT_MAKE = cd $(LIBFT_DIR) && make
-
-LIBFT_INC = -L $(LIBFT_DIR) -lft
-
-OBJS = $(SRCS:.c = .o)
-
-OBJS_BONUS = $(BONUS_SRCS:.c = .o)
+RM = rm -rf
 
 .PHONY: all bonus clean fclean re
 
+
+$(NAME):
+	make all -C minilibx_macos
+	make all -C libft
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+
+bonus :
+	make clean
+	make all -C minilibx_macos
+	make all -C libft
+	$(CC) $(FLAGS) $(BONUS_SRCS) -o $(NAME)
+
 all: $(NAME)
 
-%.o: %.c $(INCL)
-	@$(CC) $(FLAGS) -I $(INCL) -c $< -o $@
+fclean : clean
+	$(RM) $(NAME)
+	make clean -C minilibx_macos
+	make fclean -C libft
 
-$(NAME): $(OBJS) $(INCL)
-	@$(CC) $(FLAGS) $(OBJS) -lmlx $(FRAMEWOK) $(LIBFT_INC) -o $(NAME)
+clean :
+	$(RM) $(NAME)
+	make clean -C minilibx_macos
+	make clean -C libft
 
-bonus: $(OBJS_BONUS) $(INCL)
-	@$(CC) $(FLAGS) $(OBJS_BONUS) $(FRAMEWOK) $(LIBFT_INC) -o $(NAME)
-
-clean:
-	@rm -rf *.o
-	@rm -rf ./libft/*.o
-
-fclean: clean
-	@rm -rf *.a
-	@rm -rf fdf
-
-re: fclean clean
-
-
+re : fclean all

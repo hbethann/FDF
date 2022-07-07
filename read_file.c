@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egor <egor@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 18:45:39 by hbethann          #+#    #+#             */
-/*   Updated: 2022/07/02 19:38:14 by egor             ###   ########.fr       */
+/*   Updated: 2022/07/07 05:54:07 by hbethann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	get_width(char *file_name, int check)
 		fd = open(file_name, O_RDONLY);
 		line = get_next_line(fd);
 		width = word_count(line, ' ');
+		free (line);
 	}
 	else
 		width = word_count(file_name, ' ');

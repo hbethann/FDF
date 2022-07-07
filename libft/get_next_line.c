@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: einterdi <einterdi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 19:09:35 by einterdi          #+#    #+#             */
-/*   Updated: 2022/01/21 17:29:34 by einterdi         ###   ########.fr       */
+/*   Updated: 2022/07/07 05:50:06 by hbethann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_reading(int fd, char *line, char **tail, int rd)
 	while (rd > 0 && !ft_gnl_strchr(line, '\n') && !(*tail))
 	{
 		rd = read(fd, buffer, BUFFER_SIZE);
-		if (rd == 0 && *line == '\0')
+		if (rd <= 0 && *line == '\0')
 		{
 			free(line);
 			return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egor <egor@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hbethann <hbethann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 17:36:10 by egor              #+#    #+#             */
-/*   Updated: 2022/07/05 17:52:08 by egor             ###   ########.fr       */
+/*   Updated: 2022/07/07 00:10:11 by hbethann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ void	controler(t_fdf *data)
 		isometric(&data->x, &data->y, z, data);
 		isometric(&data->x1, &data->y1, z1, data);
 	}
-	if ((z || z1) && (data->color == 0))
+	if ((z) && (data->color == 0))
 		data->color = ato_h("0x8a0fff");
+	if ((z1) && (data->color == 0))
+		data->color = ato_h("0xff4077");
 	data->x += data->shift_x;
 	data->x1 += data->shift_x;
 	data->y += data->shift_y;
